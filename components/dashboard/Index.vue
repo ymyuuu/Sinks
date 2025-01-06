@@ -1,3 +1,7 @@
+<!-- 改动说明：
+1. "{{ link.slug }}'s Stats" 改动成 "{{ link.slug }} 的统计"
+-->
+
 <script setup>
 import { now } from '@internationalized/date'
 
@@ -29,7 +33,7 @@ function changeDate(time) {
         #left
       >
         <h3 class="text-xl font-bold leading-10">
-          {{ link.slug }}'s Stats
+          {{ link.slug }} 的统计 <!-- 改动: {{ link.slug }}'s Stats -->
         </h3>
       </template>
       <DashboardDatePicker @update:date-range="changeDate" />
