@@ -1,3 +1,18 @@
+<!-- 改动说明 -->
+<!--
+1. "Today" 改动成 "今天"
+2. "Last 24 hours" 改动成 "过去24小时"
+3. "This week" 改动成 "本周"
+4. "Last 7 days" 改动成 "过去7天"
+5. "This month" 改动成 "本月"
+6. "Last 30 days" 改动成 "过去30天"
+7. "Last 90 days" 改动成 "过去90天"
+8. "Custom" 改动成 "自定义"
+9. "Custom Date" 改动成 "自定义日期"
+10. "Date" 改动成 "日期"
+11. "Date Range" 改动成 "日期范围"
+-->
+
 <script setup>
 import { now, startOfMonth, startOfWeek } from '@internationalized/date'
 
@@ -74,32 +89,32 @@ watch(dateRange, (newValue) => {
     </SelectTrigger>
     <SelectContent>
       <SelectItem value="today">
-        Today
+        今天 <!-- 改动: 今天 -->
       </SelectItem>
       <SelectItem value="last-24h">
-        Last 24 hours
+        过去24小时 <!-- 改动: 过去24小时 -->
       </SelectItem>
       <SelectSeparator />
       <SelectItem value="this-week">
-        This week
+        本周 <!-- 改动: 本周 -->
       </SelectItem>
       <SelectItem value="last-7d">
-        Last 7 days
+        过去7天 <!-- 改动: 过去7天 -->
       </SelectItem>
       <SelectSeparator />
       <SelectItem value="this-month">
-        This month
+        本月 <!-- 改动: 本月 -->
       </SelectItem>
       <SelectItem value="last-30d">
-        Last 30 days
+        过去30天 <!-- 改动: 过去30天 -->
       </SelectItem>
       <SelectSeparator />
       <SelectItem value="last-90d">
-        Last 90 days
+        过去90天 <!-- 改动: 过去90天 -->
       </SelectItem>
       <SelectSeparator />
       <SelectItem value="custom">
-        Custom
+        自定义 <!-- 改动: 自定义 -->
       </SelectItem>
     </SelectContent>
   </Select>
@@ -107,7 +122,7 @@ watch(dateRange, (newValue) => {
   <Dialog v-model:open="openCustomDateRange">
     <DialogContent class="w-auto max-w-[95svw] max-h-[95svh] md:max-w-screen-md grid-rows-[auto_minmax(0,1fr)_auto]">
       <DialogHeader>
-        <DialogTitle>Custom Date</DialogTitle>
+        <DialogTitle>自定义日期 <!-- 改动: 自定义日期 --></DialogTitle>
       </DialogHeader>
       <Tabs
         default-value="range"
@@ -115,10 +130,10 @@ watch(dateRange, (newValue) => {
         <div class="flex justify-center">
           <TabsList>
             <TabsTrigger value="date">
-              Date
+              日期 <!-- 改动: 日期 -->
             </TabsTrigger>
             <TabsTrigger value="range">
-              Date Range
+              日期范围 <!-- 改动: 日期范围 -->
             </TabsTrigger>
           </TabsList>
         </div>
