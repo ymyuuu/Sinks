@@ -1,3 +1,8 @@
+<!-- 改动说明：
+1. "Name" 改动成 "名称"
+2. "Count" 改动成 "数量"
+-->
+
 <script setup>
 import { VList } from 'virtua/vue'
 
@@ -21,12 +26,12 @@ defineProps({
       <div
         class="h-12 px-4 font-medium text-left align-middle text-muted-foreground "
       >
-        Name
+        名称 <!-- 改动: Name -->
       </div>
       <div
         class="h-12 px-4 font-medium text-right align-middle text-muted-foreground"
       >
-        Count
+        数量 <!-- 改动: Count -->
       </div>
     </div>
     <VList
