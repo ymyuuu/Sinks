@@ -1,3 +1,8 @@
+<!-- 改动说明 -->
+<!--
+1. "Views" 改动成 "访问量"
+-->
+
 <script setup>
 import { AreaChart } from '@/components/ui/chart-area'
 import { BarChart } from '@/components/ui/chart-bar'
@@ -59,7 +64,7 @@ function formatTime(tick) {
 <template>
   <Card class="px-0 py-6 md:px-6">
     <CardTitle class="px-6 md:px-0">
-      Views
+      访问量 <!-- 改动: 访问量 -->
     </CardTitle>
     <component
       :is="chart"
