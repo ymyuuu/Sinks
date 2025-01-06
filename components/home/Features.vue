@@ -1,50 +1,41 @@
-<!-- 改动说明：
-1. "URL Shortening" 改动成 "URL缩短"
-2. "Analytics" 改动成 "数据分析"
-3. "Serverless" 改动成 "无服务器"
-4. "Customizable Slug" 改动成 "可自定义Slug"
-5. "AI Slug" 改动成 "AI生成Slug"
-6. "Link Expiration" 改动成 "链接过期"
--->
-
 <script setup>
 import { AreaChart, Hourglass, Link, Paintbrush, ServerOff, Sparkles } from 'lucide-vue-next'
 
 const features = ref([
   {
-    title: 'URL缩短', <!-- 改动: URL Shortening -->
+    title: 'URL Shortening',
     description:
-          '将您的URL压缩到最小长度。',
+          'Compress your URLs to their minimal length.',
     icon: Link,
   },
   {
-    title: '数据分析', <!-- 改动: Analytics -->
+    title: 'Analytics',
     description:
-          '监控链接分析并收集有价值的统计数据。',
+          'Monitor link analytics and gather insightful statistics.',
     icon: AreaChart,
   },
   {
-    title: '无服务器', <!-- 改动: Serverless -->
+    title: 'Serverless',
     description:
-          '无需传统服务器即可部署。',
+          'Deploy without the need for traditional servers.',
     icon: ServerOff,
   },
   {
-    title: '可自定义Slug', <!-- 改动: Customizable Slug -->
+    title: 'Customizable Slug',
     description:
-          '支持个性化Slug和大小写敏感。',
+          'Support for personalized slugs and case sensitivity.',
     icon: Paintbrush,
   },
   {
-    title: 'AI生成Slug', <!-- 改动: AI Slug -->
+    title: 'AI Slug',
     description:
-          '利用AI生成Slug。',
+          'Leverage AI to generate slugs.',
     icon: Sparkles,
   },
   {
-    title: '链接过期', <!-- 改动: Link Expiration -->
+    title: 'Link Expiration',
     description:
-          '为您的链接设置过期时间。',
+          'Set expiration dates for your links.',
     icon: Hourglass,
   },
 ])
@@ -54,10 +45,10 @@ const features = ref([
   <main class="pt-16 md:py-12">
     <div class="md:pb-12">
       <h2 class="text-4xl font-bold lg:text-5xl lg:tracking-tight">
-        功能 <!-- 改动: Features -->
+        Features
       </h2>
       <p class="my-8 text-lg md:mb-0 text-slate-600">
-        简单且足够的功能
+        Simple and sufficient functionality
       </p>
     </div>
 
