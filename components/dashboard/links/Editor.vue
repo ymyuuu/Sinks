@@ -1,3 +1,14 @@
+<!-- 改动说明 -->
+<!--
+1. 注释内容翻译成中文，保留原代码结构。
+2. "Edit Link" 改动成 "编辑链接"。
+3. "Create Link" 改动成 "创建链接"。
+4. "The preview mode link is valid for up to 24 hours." 改动成 "预览模式的链接有效期最长为 24 小时。"。
+5. "Close" 改动成 "关闭"。
+6. "Save" 改动成 "保存"。
+7. Toast 提示文字翻译为中文："Link updated successfully" 改动成 "链接更新成功"，"Link created successfully" 改动成 "链接创建成功"。
+-->
+
 <script setup>
 import { DependencyType } from '@/components/ui/auto-form/interface'
 import { LinkSchema, nanoid } from '@/schemas/link'
@@ -10,7 +21,7 @@ import { z } from 'zod'
 const props = defineProps({
   link: {
     type: Object,
-    default: () => ({}),
+    default: () => ({}), // 默认的链接对象
   },
 })
 
@@ -19,7 +30,7 @@ const emit = defineEmits(['update:link'])
 const link = ref(props.link)
 const dialogOpen = ref(false)
 
-const isEdit = !!props.link.id
+const isEdit = !!props.link.id // 判断是编辑模式还是创建模式
 
 const EditLinkSchema = LinkSchema.pick({
   url: true,
@@ -35,17 +46,17 @@ const EditLinkSchema = LinkSchema.pick({
     description: true,
     image: true,
   }).extend({
-    expiration: z.coerce.date().optional(),
+    expiration: z.coerce.date().optional(), // 过期时间字段，支持可选
   }).optional(),
 })
 
 const fieldConfig = {
   slug: {
-    disabled: isEdit,
+    disabled: isEdit, // 如果是编辑模式，slug 字段不可编辑
   },
   optional: {
     comment: {
-      component: 'textarea',
+      component: 'textarea', // 评论字段使用多行文本框
     },
   },
 }
@@ -55,12 +66,12 @@ const dependencies = [
     sourceField: 'slug',
     type: DependencyType.DISABLES,
     targetField: 'slug',
-    when: () => isEdit,
+    when: () => isEdit, // 如果是编辑模式，禁用 slug 字段
   },
 ]
 
 const form = useForm({
-  validationSchema: toTypedSchema(EditLinkSchema),
+  validationSchema: toTypedSchema(EditLinkSchema), // 使用模式校验表单
   initialValues: {
     slug: link.value.slug,
     url: link.value.url,
@@ -68,15 +79,17 @@ const form = useForm({
       comment: link.value.comment,
     },
   },
-  validateOnMount: isEdit,
-  keepValuesOnUnmount: isEdit,
+  validateOnMount: isEdit, // 在编辑模式下挂载时校验
+  keepValuesOnUnmount: isEdit, // 在编辑模式下保留卸载时的值
 })
 
+// 随机生成 slug
 function randomSlug() {
   form.setFieldValue('slug', nanoid()())
 }
 
 const aiSlugPending = ref(false)
+// AI 生成 slug
 async function aiSlug() {
   if (!form.values.url)
     return
@@ -96,12 +109,14 @@ async function aiSlug() {
   aiSlugPending.value = false
 }
 
+// 组件挂载时设置过期时间
 onMounted(() => {
   if (link.value.expiration) {
     form.setFieldValue('optional.expiration', unix2date(link.value.expiration))
   }
 })
 
+// 表单提交处理
 async function onSubmit(formData) {
   const link = {
     url: formData.url,
@@ -116,10 +131,10 @@ async function onSubmit(formData) {
   dialogOpen.value = false
   emit('update:link', newLink)
   if (isEdit) {
-    toast('Link updated successfully')
+    toast('链接更新成功')
   }
   else {
-    toast('Link created successfully')
+    toast('链接创建成功')
   }
 }
 
@@ -135,19 +150,19 @@ const { previewMode } = useRuntimeConfig().public
           variant="outline"
           @click="randomSlug"
         >
-          Create Link
+          创建链接
         </Button>
       </slot>
     </DialogTrigger>
     <DialogContent class="max-w-[95svw] max-h-[95svh] md:max-w-lg grid-rows-[auto_minmax(0,1fr)_auto]">
       <DialogHeader>
-        <DialogTitle>{{ link.id ? 'Edit Link' : 'Create Link' }}</DialogTitle>
+        <DialogTitle>{{ link.id ? '编辑链接' : '创建链接' }}</DialogTitle>
       </DialogHeader>
       <p
         v-if="previewMode"
         class="text-sm text-muted-foreground"
       >
-        The preview mode link is valid for up to 24 hours.
+        预览模式的链接有效期最长为 24 小时。
       </p>
       <AutoForm
         class="px-2 space-y-2 overflow-y-auto"
@@ -185,11 +200,11 @@ const { previewMode } = useRuntimeConfig().public
               variant="secondary"
               class="mt-2 sm:mt-0"
             >
-              Close
+              关闭
             </Button>
           </DialogClose>
           <Button type="submit">
-            Save
+            保存
           </Button>
         </DialogFooter>
       </AutoForm>
