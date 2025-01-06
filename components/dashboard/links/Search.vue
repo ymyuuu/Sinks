@@ -1,3 +1,13 @@
+<!-- 改动说明 -->
+<!--
+1. "Search Links..." 改动成 "搜索链接..."
+2. "Search" 改动成 "搜索"
+3. "⌘ K" 改动成 "⌘ K"
+4. "No links found." 改动成 "未找到链接。"
+5. "Links" 改动成 "链接"
+6. "Continue" 改动成 "继续"
+-->
+
 <script setup>
 import { useMagicKeys } from '@vueuse/core'
 import { useFuse } from '@vueuse/integrations/useFuse'
@@ -55,21 +65,21 @@ onMounted(() => {
       class="relative h-10 w-full justify-start bg-background text-muted-foreground sm:w-32 md:w-48"
       @click="isOpen = true"
     >
-      <span class="hidden md:inline-flex">Search Links...</span>
-      <span class="inline-flex md:hidden">Search</span>
+      <span class="hidden md:inline-flex">搜索链接...</span> <!-- 改动: 搜索链接... -->
+      <span class="inline-flex md:hidden">搜索</span> <!-- 改动: 搜索 -->
       <kbd class="pointer-events-none absolute right-[0.3rem] top-[0.6rem] hidden h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium opacity-100 sm:flex">
-        <span class="text-xs">⌘</span>K
+        <span class="text-xs">⌘</span>K <!-- 改动: ⌘ K -->
       </kbd>
     </Button>
     <Dialog :open="isOpen" @update:open="isOpen = !isOpen">
       <DialogContent class="overflow-hidden p-0 shadow-lg">
         <Command v-model:search-term="searchTerm" v-model="selectedLink" class="[&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-muted-foreground [&_[cmdk-group]:not([hidden])_~[cmdk-group]]:pt-0 [&_[cmdk-group]]:px-2 [&_[cmdk-input-wrapper]_svg]:h-5 [&_[cmdk-input-wrapper]_svg]:w-5 [&_[cmdk-input]]:h-12 [&_[cmdk-item]]:px-2 [&_[cmdk-item]]:py-3 [&_[cmdk-item]_svg]:h-5 [&_[cmdk-item]_svg]:w-5">
-          <CommandInput placeholder="Type to search..." />
+          <CommandInput placeholder="输入搜索内容..." /> <!-- 改动: 输入搜索内容... -->
           <CommandList>
             <CommandEmpty v-if="searchTerm">
-              No links found.
+              未找到链接。 <!-- 改动: 未找到链接。 -->
             </CommandEmpty>
-            <CommandGroup heading="Links">
+            <CommandGroup heading="链接"> <!-- 改动: 链接 -->
               <CommandItem v-for="link in filteredLinks" :key="link.item?.id" class="cursor-pointer" :value="link.item" @select="selectLink(link.item)">
                 <div class="flex gap-1 w-full">
                   <div class="flex-1 overflow-hidden inline-flex gap-1 items-center">
