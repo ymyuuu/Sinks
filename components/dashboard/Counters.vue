@@ -1,3 +1,9 @@
+<!-- 改动说明：
+1. "Visits" 改动成 "访问量"
+2. "Visitors" 改动成 "访客数"
+3. "Referers" 改动成 "来源"
+-->
+
 <script setup>
 import NumberFlow from '@number-flow/vue'
 import { Flame, MousePointerClick, Users } from 'lucide-vue-next'
@@ -42,7 +48,7 @@ onBeforeUnmount(() => {
     <Card>
       <CardHeader class="flex flex-row items-center justify-between pb-2 space-y-0">
         <CardTitle class="text-sm font-medium">
-          Visits
+          访问量 <!-- 改动: Visits -->
         </CardTitle>
         <MousePointerClick class="w-4 h-4 text-muted-foreground" />
       </CardHeader>
@@ -53,7 +59,7 @@ onBeforeUnmount(() => {
     <Card>
       <CardHeader class="flex flex-row items-center justify-between pb-2 space-y-0">
         <CardTitle class="text-sm font-medium">
-          Visitors
+          访客数 <!-- 改动: Visitors -->
         </CardTitle>
         <Users class="w-4 h-4 text-muted-foreground" />
       </CardHeader>
@@ -64,7 +70,7 @@ onBeforeUnmount(() => {
     <Card>
       <CardHeader class="flex flex-row items-center justify-between pb-2 space-y-0">
         <CardTitle class="text-sm font-medium">
-          Referers
+          来源 <!-- 改动: Referers -->
         </CardTitle>
         <Flame class="w-4 h-4 text-muted-foreground" />
       </CardHeader>
