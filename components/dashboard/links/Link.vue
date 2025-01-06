@@ -1,3 +1,12 @@
+<!-- 改动说明 -->
+<!--
+1. "Copy successful!" 改动成 "复制成功！"
+2. "Created At:" 改动成 "创建时间："
+3. "Updated At:" 改动成 "更新时间："
+4. "Expires At:" 改动成 "过期时间："
+5. 代码注释翻译成中文，保留原代码结构。
+-->
+
 <script setup>
 import { useClipboard } from '@vueuse/core'
 import { CalendarPlus2, Copy, CopyCheck, Eraser, Hourglass, Link as LinkIcon, QrCode, SquareChevronDown, SquarePen } from 'lucide-vue-next'
@@ -17,16 +26,22 @@ const editPopoverOpen = ref(false)
 
 const { host, origin } = location
 
+// 获取链接的主机名
 function getLinkHost(url) {
   const { host } = parseURL(url)
   return host
 }
 
+// 计算短链接
 const shortLink = computed(() => `${origin}/${props.link.slug}`)
+
+// 计算链接图标
 const linkIcon = computed(() => `https://unavatar.io/${getLinkHost(props.link.url)}?fallback=https://sink.cool/icon.png`)
 
+// 使用剪贴板功能
 const { copy, copied } = useClipboard({ source: shortLink.value, copiedDuring: 400 })
 
+// 更新链接函数
 function updateLink(link, type) {
   emit('update:link', link, type)
   editPopoverOpen.value = false
@@ -69,7 +84,7 @@ function updateLink(link, type) {
             <Copy
               v-else
               class="w-4 h-4 ml-1 shrink-0"
-              @click.prevent="copy(shortLink);toast('Copy successful!')"
+              @click.prevent="copy(shortLink);toast('复制成功！')"
             />
           </div>
 
@@ -134,7 +149,7 @@ function updateLink(link, type) {
                 <SquarePen
                   class="w-5 h-5 mr-2"
                 />
-                Edit
+                编辑
               </div>
             </DashboardLinksEditor>
 
@@ -149,7 +164,7 @@ function updateLink(link, type) {
               >
                 <Eraser
                   class="w-5 h-5 mr-2"
-                /> Delete
+                /> 删除
               </div>
             </DashboardLinksDelete>
           </PopoverContent>
@@ -162,8 +177,8 @@ function updateLink(link, type) {
               <span class="inline-flex items-center leading-5"><CalendarPlus2 class="w-4 h-4 mr-1" /> {{ shortDate(link.createdAt) }}</span>
             </TooltipTrigger>
             <TooltipContent>
-              <p>Created At: {{ longDate(link.createdAt) }}</p>
-              <p>Updated At: {{ longDate(link.updatedAt) }}</p>
+              <p>创建时间：{{ longDate(link.createdAt) }}</p>
+              <p>更新时间：{{ longDate(link.updatedAt) }}</p>
             </TooltipContent>
           </Tooltip>
         </TooltipProvider>
@@ -175,7 +190,7 @@ function updateLink(link, type) {
                 <span class="inline-flex items-center leading-5"><Hourglass class="w-4 h-4 mr-1" /> {{ shortDate(link.expiration) }}</span>
               </TooltipTrigger>
               <TooltipContent>
-                <p>Expires At: {{ longDate(link.expiration) }}</p>
+                <p>过期时间：{{ longDate(link.expiration) }}</p>
               </TooltipContent>
             </Tooltip>
           </TooltipProvider>
