@@ -1,41 +1,65 @@
 <script setup>
-import { now } from '@internationalized/date'
+import { AlertCircle } from 'lucide-vue-next'
+import { toast } from 'vue-sonner'
+import { z } from 'zod'
 
-defineProps({
-  link: {
-    type: Object,
-    default: () => null,
-  },
+const LoginSchema = z.object({
+  token: z.string().describe('SiteToken'),
 })
+const loginFieldConfig = {
+  token: {
+    inputProps: {
+      type: 'password',
+      placeholder: '********',
+    },
+  },
+}
 
-const startAt = ref(date2unix(now().subtract({ days: 7 })))
-const endAt = ref(date2unix(now()))
+const { previewMode } = useRuntimeConfig().public
 
-provide('startAt', startAt)
-provide('endAt', endAt)
-
-function changeDate(time) {
-  // console.log('dashboard date', new Date(time[0] * 1000), new Date(time[1] * 1000))
-  startAt.value = time[0]
-  endAt.value = time[1]
+async function onSubmit(form) {
+  try {
+    localStorage.setItem('SinkSiteToken', form.token)
+    await useAPI('/api/verify')
+    navigateTo('/dashboard')
+  }
+  catch (e) {
+    console.error(e)
+    toast.error('Login failed, please try again.', {
+      description: e.message,
+    })
+  }
 }
 </script>
 
 <template>
-  <main class="space-y-6">
-    <DashboardNav>
-      <template
-        v-if="link"
-        #left
+  <Card class="w-full max-w-sm">
+    <CardHeader>
+      <CardTitle class="text-2xl">
+        Login
+      </CardTitle>
+      <CardDescription>
+        Enter your site token to login.
+      </CardDescription>
+    </CardHeader>
+    <CardContent class="grid gap-4">
+      <AutoForm
+        class="space-y-6"
+        :schema="LoginSchema"
+        :field-config="loginFieldConfig"
+        @submit="onSubmit"
       >
-        <h3 class="text-xl font-bold leading-10">
-          {{ link.slug }}'s Stats
-        </h3>
-      </template>
-      <DashboardDatePicker @update:date-range="changeDate" />
-    </DashboardNav>
-    <DashboardCounters />
-    <DashboardViews />
-    <DashboardMetrics />
-  </main>
+        <Alert v-if="previewMode">
+          <AlertCircle class="w-4 h-4" />
+          <AlertTitle>Tips</AlertTitle>
+          <AlertDescription>
+            The site token for preview mode is <code class="font-mono text-green-500">SinkCool</code> .
+          </AlertDescription>
+        </Alert>
+        <Button class="w-full">
+          Login
+        </Button>
+      </AutoForm>
+    </CardContent>
+  </Card>
 </template>
