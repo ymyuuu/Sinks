@@ -1,3 +1,7 @@
+<!-- 改动说明：
+1. "Locations" 改动成 "位置"
+-->
+
 <script setup>
 import { ChartTooltip } from '@/components/ui/chart'
 import { VisSingleContainer, VisTopoJSONMap, VisTopoJSONMapSelectors } from '@unovis/vue'
@@ -61,7 +65,7 @@ const Tooltip = {
 <template>
   <Card class="flex flex-col md:h-[500px]">
     <CardHeader>
-      <CardTitle>Locations</CardTitle>
+      <CardTitle>位置</CardTitle> <!-- 改动: Locations -->
     </CardHeader>
     <CardContent class="flex-1 flex [&_[data-radix-aspect-ratio-wrapper]]:flex-1">
       <AspectRatio :ratio="65 / 30">
