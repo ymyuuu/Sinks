@@ -1,3 +1,11 @@
+<!-- 改动说明 -->
+<!--
+1. "LogOut" 改动成 "登出"
+2. "Are you sure you want to log out?" 改动成 "您确定要登出吗？"
+3. "Cancel" 改动成 "取消"
+4. "LogOut" 改动成 "登出"
+-->
+
 <script setup>
 import { LogOut } from 'lucide-vue-next'
 
@@ -16,15 +24,15 @@ function logOut() {
     </AlertDialogTrigger>
     <AlertDialogContent class="max-w-[95svw] max-h-[95svh] md:max-w-lg grid-rows-[auto_minmax(0,1fr)_auto]">
       <AlertDialogHeader>
-        <AlertDialogTitle>LogOut ?</AlertDialogTitle>
+        <AlertDialogTitle>登出 ? <!-- 改动: 登出 --></AlertDialogTitle>
         <AlertDialogDescription>
-          Are you sure you want to log out ?
+          您确定要登出吗？ <!-- 改动: 您确定要登出吗？ -->
         </AlertDialogDescription>
       </AlertDialogHeader>
       <AlertDialogFooter>
-        <AlertDialogCancel>Cancel</AlertDialogCancel>
+        <AlertDialogCancel>取消 <!-- 改动: 取消 --></AlertDialogCancel>
         <AlertDialogAction @click="logOut">
-          LogOut
+          登出 <!-- 改动: 登出 -->
         </AlertDialogAction>
       </AlertDialogFooter>
     </AlertDialogContent>
